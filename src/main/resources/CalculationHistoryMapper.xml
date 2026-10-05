@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.caculate.CalculationHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.caculate.CalculationHistory">
+        <id column="id" property="id"/>
+        <result column="expression" property="expression"/>
+        <result column="result" property="result"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, expression, result, create_time
+        from calculation_history
+        order by create_time desc
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into calculation_history (expression, result, create_time)
+        values (#{expression}, #{result}, #{createTime})
+    </insert>
+
+    <delete id="deleteById">
+        delete from calculation_history where id = #{id}
+    </delete>
+
+</mapper>
